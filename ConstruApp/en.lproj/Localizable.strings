@@ -1,0 +1,206 @@
+/* 
+   Localizable.strings
+   ConstruApp - English
+   
+   Created by Claude on 8/6/25.
+*/
+
+// MARK: - General
+"general.cancel" = "Cancel";
+"general.create" = "Create";
+"general.done" = "Done";
+"general.save" = "Save";
+"general.delete" = "Delete";
+"general.edit" = "Edit";
+"general.add" = "Add";
+"general.remove" = "Remove";
+"general.search" = "Search";
+"general.reset" = "Reset";
+"general.settings" = "Settings";
+"general.photos" = "Photos";
+"general.videos" = "Videos";
+"general.photo" = "Photo";
+"general.video" = "Video";
+"general.clear" = "Clear";
+"general.filename" = "File Name";
+"general.type" = "Type";
+"general.date" = "Date";
+"general.category" = "Category";
+"general.close" = "Close";
+"general.select_all" = "Select All";
+"general.deselect_all" = "Deselect All";
+
+// MARK: - Navigation
+"nav.projects" = "Projects";
+"nav.new_project" = "New Project";
+"nav.edit_project" = "Edit Project";
+"nav.blueprints" = "Blueprints";
+"nav.timeline" = "Timeline";
+"nav.settings" = "Settings";
+"nav.media_gallery" = "Media Gallery";
+"nav.blueprint" = "Blueprint";
+
+// MARK: - Project Management
+"project.name" = "Project Name";
+"project.client_name" = "Client Name";
+"project.location" = "Location";
+"project.description" = "Description";
+"project.details" = "Project Details";
+"project.created" = "Created";
+"project.updated" = "Updated";
+"project.archive" = "Archive Project";
+"project.no_projects" = "No Projects Yet";
+"project.no_projects_subtitle" = "Create your first construction project to start documenting progress";
+"project.create_project" = "Create Project";
+"project.blueprints_count" = "blueprints";
+"project.logs_count" = "logs";
+"project.days_active" = "Days Active";
+"project.total_logs" = "Total Logs";
+
+// MARK: - Search
+"search.projects" = "Search projects...";
+
+// MARK: - Blueprints
+"blueprint.add" = "Add Blueprint";
+"blueprint.add_first" = "Add First Blueprint";
+"blueprint.no_blueprints" = "No blueprints yet";
+"blueprint.name" = "Blueprint Name";
+"blueprint.file" = "Blueprint File";
+
+// MARK: - Log Entries
+"log.title" = "Log Title";
+"log.notes" = "Notes";
+"log.category" = "Category";
+"log.add_log" = "Add Log Entry";
+"log.recent_activity" = "Recent Activity";
+"log.no_activity" = "No activity yet";
+"log.view_timeline" = "View Timeline";
+"log.view_all_entries" = "View All %d Entries";
+"log.with_media" = "With Media";
+"log.details" = "Log Details";
+"log.notes_observations" = "Notes and observations";
+"log.location" = "Location";
+"log.page" = "Page %d";
+"log.position" = "Position: %.1f%%, %.1f%%";
+"log.date" = "Date";
+
+// MARK: - Categories
+"category.electrical" = "Electrical";
+"category.plumbing" = "Plumbing";
+"category.structural" = "Structural";
+"category.hvac" = "HVAC";
+"category.insulation" = "Insulation";
+"category.flooring" = "Flooring";
+"category.roofing" = "Roofing";
+"category.windows" = "Windows";
+"category.doors" = "Doors";
+"category.finishes" = "Finishes";
+"category.safety" = "Safety";
+"category.general" = "General";
+
+// MARK: - Category Descriptions
+"category.electrical.desc" = "Wiring, outlets, fixtures";
+"category.plumbing.desc" = "Pipes, fixtures, water systems";
+"category.structural.desc" = "Framing, foundations, supports";
+"category.hvac.desc" = "Heating, cooling, ventilation";
+"category.insulation.desc" = "Thermal and sound insulation";
+"category.flooring.desc" = "Floor installation and preparation";
+"category.roofing.desc" = "Roof structure and materials";
+"category.windows.desc" = "Window installation and sealing";
+"category.doors.desc" = "Door frames and hardware";
+"category.finishes.desc" = "Paint, trim, final details";
+"category.safety.desc" = "Safety concerns and violations";
+"category.general.desc" = "General observations";
+
+// MARK: - Category Groups
+"category.group.construction" = "Construction";
+"category.group.finishing" = "Finishing";
+"category.group.other" = "Other";
+
+// MARK: - Category Filters
+"filter.construction_only" = "Construction Only";
+"filter.finishing_only" = "Finishing Only";
+"filter.safety_issues" = "Safety Issues";
+"filter.show_all" = "Show All";
+"filter.categories" = "Categories";
+"filter.date_range" = "Date Range";
+"filter.select_all" = "Select All";
+"filter.deselect_all" = "Deselect All";
+
+// MARK: - Timeline
+"timeline.filters" = "Timeline Filters";
+"timeline.no_entries" = "No entries found";
+
+// MARK: - Media
+"media.photos" = "Photos";
+"media.videos" = "Videos";
+"media.capture" = "Capture";
+"media.library" = "Library";
+"media.add_media" = "Add Media";
+"media.add_photos_video" = "Add Photos or Video";
+"media.take_photo_video" = "Take Photo or Video";
+"media.use_camera" = "Use camera to capture new media";
+"media.choose_library" = "Choose from Library";
+"media.select_photos" = "Select multiple photos";
+"media.capture_document" = "Capture photos or videos to document this log entry";
+"media.video" = "Video";
+
+// MARK: - Stats
+"stats.summary" = "Summary";
+"stats.categories" = "Categories";
+
+// MARK: - Empty States
+"empty.blueprints" = "No blueprints yet";
+"empty.activity" = "No activity yet";
+
+// MARK: - Actions
+"action.add_blueprint" = "Add Blueprint";
+"action.edit_project" = "Edit Project";
+"action.archive_project" = "Archive Project";
+
+// MARK: - Settings
+"settings.language" = "Language";
+"settings.app_language" = "App Language";
+"settings.app_theme" = "App Theme";
+"settings.appearance" = "Appearance";
+"settings.configuration" = "Configuration";
+
+// MARK: - Languages
+"language.english" = "English";
+"language.spanish" = "Spanish";
+"language.system" = "System";
+
+// MARK: - Themes
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+"theme.system" = "System";
+
+// MARK: - Alerts & Errors
+"error.save_failed" = "Failed to save";
+"error.load_failed" = "Failed to load";
+"error.unknown" = "An unknown error occurred";
+
+// MARK: - Accessibility
+"a11y.add_project" = "Add new project";
+"a11y.project_menu" = "Project options menu";
+"a11y.blueprint_thumbnail" = "Blueprint thumbnail";
+
+// MARK: - Gallery
+"gallery.loading_media" = "Loading media...";
+"gallery.no_media_title" = "No Media Found";
+"gallery.no_media_subtitle" = "Add photos and videos to your log entries to see them here";
+"gallery.media_info" = "Media Information";
+"gallery.total_items" = "Total Items: %d";
+"gallery.photos_count" = "Photos: %d";
+"gallery.videos_count" = "Videos: %d";
+"gallery.image_load_error" = "Unable to load image";
+"gallery.video_load_error" = "Unable to load video";
+
+// MARK: - Filter
+"filter.all_categories" = "All Categories";
+"filter.categories_count" = "%d Categories";
+"filter.all_dates" = "All Dates";
+"filter.select_date_range" = "Select Date Range";
+"filter.start_date" = "Start Date";
+"filter.end_date" = "End Date";
+"filter.select_categories" = "Select Categories";

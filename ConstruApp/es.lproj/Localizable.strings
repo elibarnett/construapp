@@ -1,0 +1,206 @@
+/* 
+   Localizable.strings
+   ConstruApp - Spanish
+   
+   Created by Claude on 8/6/25.
+*/
+
+// MARK: - General
+"general.cancel" = "Cancelar";
+"general.create" = "Crear";
+"general.done" = "Hecho";
+"general.save" = "Guardar";
+"general.delete" = "Eliminar";
+"general.edit" = "Editar";
+"general.add" = "Agregar";
+"general.remove" = "Quitar";
+"general.search" = "Buscar";
+"general.reset" = "Restablecer";
+"general.settings" = "Configuración";
+"general.photos" = "Fotos";
+"general.videos" = "Videos";
+"general.photo" = "Foto";
+"general.video" = "Video";
+"general.clear" = "Limpiar";
+"general.filename" = "Nombre del Archivo";
+"general.type" = "Tipo";
+"general.date" = "Fecha";
+"general.category" = "Categoría";
+"general.close" = "Cerrar";
+"general.select_all" = "Seleccionar Todo";
+"general.deselect_all" = "Deseleccionar Todo";
+
+// MARK: - Navigation
+"nav.projects" = "Proyectos";
+"nav.new_project" = "Nuevo Proyecto";
+"nav.edit_project" = "Editar Proyecto";
+"nav.blueprints" = "Planos";
+"nav.timeline" = "Cronología";
+"nav.settings" = "Configuración";
+"nav.media_gallery" = "Galería de Medios";
+"nav.blueprint" = "Plano";
+
+// MARK: - Project Management
+"project.name" = "Nombre del Proyecto";
+"project.client_name" = "Nombre del Cliente";
+"project.location" = "Ubicación";
+"project.description" = "Descripción";
+"project.details" = "Detalles del Proyecto";
+"project.created" = "Creado";
+"project.updated" = "Actualizado";
+"project.archive" = "Archivar Proyecto";
+"project.no_projects" = "Sin Proyectos Aún";
+"project.no_projects_subtitle" = "Crea tu primer proyecto de construcción para comenzar a documentar el progreso";
+"project.create_project" = "Crear Proyecto";
+"project.blueprints_count" = "planos";
+"project.logs_count" = "registros";
+"project.days_active" = "Días Activo";
+"project.total_logs" = "Total de Registros";
+
+// MARK: - Search
+"search.projects" = "Buscar proyectos...";
+
+// MARK: - Blueprints
+"blueprint.add" = "Agregar Plano";
+"blueprint.add_first" = "Agregar Primer Plano";
+"blueprint.no_blueprints" = "Sin planos aún";
+"blueprint.name" = "Nombre del Plano";
+"blueprint.file" = "Archivo del Plano";
+
+// MARK: - Log Entries
+"log.title" = "Título del Registro";
+"log.notes" = "Notas";
+"log.category" = "Categoría";
+"log.add_log" = "Agregar Registro";
+"log.recent_activity" = "Actividad Reciente";
+"log.no_activity" = "Sin actividad aún";
+"log.view_timeline" = "Ver Cronología";
+"log.view_all_entries" = "Ver Todos los %d Registros";
+"log.with_media" = "Con Multimedia";
+"log.details" = "Detalles del Registro";
+"log.notes_observations" = "Notas y observaciones";
+"log.location" = "Ubicación";
+"log.page" = "Página %d";
+"log.position" = "Posición: %.1f%%, %.1f%%";
+"log.date" = "Fecha";
+
+// MARK: - Categories
+"category.electrical" = "Eléctrico";
+"category.plumbing" = "Plomería";
+"category.structural" = "Estructural";
+"category.hvac" = "HVAC";
+"category.insulation" = "Aislamiento";
+"category.flooring" = "Pisos";
+"category.roofing" = "Techado";
+"category.windows" = "Ventanas";
+"category.doors" = "Puertas";
+"category.finishes" = "Acabados";
+"category.safety" = "Seguridad";
+"category.general" = "General";
+
+// MARK: - Category Descriptions
+"category.electrical.desc" = "Cableado, tomacorrientes, instalaciones";
+"category.plumbing.desc" = "Tuberías, instalaciones, sistemas de agua";
+"category.structural.desc" = "Estructura, cimientos, soportes";
+"category.hvac.desc" = "Calefacción, refrigeración, ventilación";
+"category.insulation.desc" = "Aislamiento térmico y acústico";
+"category.flooring.desc" = "Instalación y preparación de pisos";
+"category.roofing.desc" = "Estructura y materiales del techo";
+"category.windows.desc" = "Instalación y sellado de ventanas";
+"category.doors.desc" = "Marcos de puertas y herrajes";
+"category.finishes.desc" = "Pintura, molduras, detalles finales";
+"category.safety.desc" = "Preocupaciones y violaciones de seguridad";
+"category.general.desc" = "Observaciones generales";
+
+// MARK: - Category Groups
+"category.group.construction" = "Construcción";
+"category.group.finishing" = "Acabados";
+"category.group.other" = "Otros";
+
+// MARK: - Category Filters
+"filter.construction_only" = "Solo Construcción";
+"filter.finishing_only" = "Solo Acabados";
+"filter.safety_issues" = "Problemas de Seguridad";
+"filter.show_all" = "Mostrar Todo";
+"filter.categories" = "Categorías";
+"filter.date_range" = "Rango de Fechas";
+"filter.select_all" = "Seleccionar Todo";
+"filter.deselect_all" = "Deseleccionar Todo";
+
+// MARK: - Timeline
+"timeline.filters" = "Filtros de Cronología";
+"timeline.no_entries" = "No se encontraron registros";
+
+// MARK: - Media
+"media.photos" = "Fotos";
+"media.videos" = "Videos";
+"media.capture" = "Capturar";
+"media.library" = "Biblioteca";
+"media.add_media" = "Agregar Multimedia";
+"media.add_photos_video" = "Agregar Fotos o Video";
+"media.take_photo_video" = "Tomar Foto o Video";
+"media.use_camera" = "Usar cámara para capturar nuevos medios";
+"media.choose_library" = "Elegir de la Biblioteca";
+"media.select_photos" = "Seleccionar múltiples fotos";
+"media.capture_document" = "Captura fotos o videos para documentar este registro";
+"media.video" = "Video";
+
+// MARK: - Stats
+"stats.summary" = "Resumen";
+"stats.categories" = "Categorías";
+
+// MARK: - Empty States
+"empty.blueprints" = "Sin planos aún";
+"empty.activity" = "Sin actividad aún";
+
+// MARK: - Actions
+"action.add_blueprint" = "Agregar Plano";
+"action.edit_project" = "Editar Proyecto";
+"action.archive_project" = "Archivar Proyecto";
+
+// MARK: - Settings
+"settings.language" = "Idioma";
+"settings.app_language" = "Idioma de la Aplicación";
+"settings.app_theme" = "Tema de la Aplicación";
+"settings.appearance" = "Apariencia";
+"settings.configuration" = "Configuración";
+
+// MARK: - Languages
+"language.english" = "Inglés";
+"language.spanish" = "Español";
+"language.system" = "Sistema";
+
+// MARK: - Themes
+"theme.light" = "Claro";
+"theme.dark" = "Oscuro";
+"theme.system" = "Sistema";
+
+// MARK: - Alerts & Errors
+"error.save_failed" = "Error al guardar";
+"error.load_failed" = "Error al cargar";
+"error.unknown" = "Ocurrió un error desconocido";
+
+// MARK: - Accessibility
+"a11y.add_project" = "Agregar nuevo proyecto";
+"a11y.project_menu" = "Menú de opciones del proyecto";
+"a11y.blueprint_thumbnail" = "Miniatura del plano";
+
+// MARK: - Gallery
+"gallery.loading_media" = "Cargando medios...";
+"gallery.no_media_title" = "No se Encontraron Medios";
+"gallery.no_media_subtitle" = "Agrega fotos y videos a tus entradas de registro para verlos aquí";
+"gallery.media_info" = "Información del Medio";
+"gallery.total_items" = "Elementos Totales: %d";
+"gallery.photos_count" = "Fotos: %d";
+"gallery.videos_count" = "Videos: %d";
+"gallery.image_load_error" = "No se puede cargar la imagen";
+"gallery.video_load_error" = "No se puede cargar el video";
+
+// MARK: - Filter
+"filter.all_categories" = "Todas las Categorías";
+"filter.categories_count" = "%d Categorías";
+"filter.all_dates" = "Todas las Fechas";
+"filter.select_date_range" = "Seleccionar Rango de Fechas";
+"filter.start_date" = "Fecha de Inicio";
+"filter.end_date" = "Fecha Final";
+"filter.select_categories" = "Seleccionar Categorías";
