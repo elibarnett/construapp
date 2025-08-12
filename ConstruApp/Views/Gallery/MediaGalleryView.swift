@@ -19,7 +19,6 @@ struct MediaGalleryView: View {
     @State private var filter = GalleryFilter.all
     @State private var selectedMediaItem: GalleryMediaItem?
     @State private var showingMediaDetail = false
-    @State private var showingFilters = false
     @State private var showingDatePicker = false
     @State private var showingCategoryFilter = false
     
@@ -36,6 +35,9 @@ struct MediaGalleryView: View {
                     // Elegant header with context info
                     galleryHeader
                     
+                    // Filter bar
+                    filterBar
+
                     // Content area
                     if dataProvider.isLoading {
                         loadingView
@@ -45,16 +47,6 @@ struct MediaGalleryView: View {
                         galleryGrid
                     }
                 }
-                
-                // Floating filter controls - architect-inspired design
-                VStack {
-                    HStack {
-                        Spacer()
-                        filterControlPanel
-                    }
-                    Spacer()
-                }
-                .padding()
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
@@ -119,32 +111,29 @@ struct MediaGalleryView: View {
     
     private var galleryGrid: some View {
         ScrollView {
-            LazyVGrid(columns: gridColumns, spacing: DesignSystem.Spacing.lg) {
+            LazyVGrid(columns: gridColumns, spacing: DesignSystem.Spacing.sm) {
                 ForEach(dataProvider.mediaItems) { mediaItem in
                     MediaGalleryItem(mediaItem: mediaItem) {
                         selectedMediaItem = mediaItem
                         showingMediaDetail = true
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium))
+                    .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.small))
                     .shadow(
-                        color: themeManager.adaptiveColor(.primaryText).opacity(0.08),
-                        radius: 8,
+                        color: themeManager.adaptiveColor(.primaryText).opacity(0.05),
+                        radius: 4,
                         x: 0,
-                        y: 4
+                        y: 2
                     )
                 }
             }
             .padding(DesignSystem.Spacing.screenPadding)
-            // Add extra bottom padding to account for floating controls
-            .padding(.bottom, 100)
         }
         .background(themeManager.adaptiveColor(.background))
     }
     
     private var gridColumns: [GridItem] {
         [
-            // More architectural proportions - golden ratio inspired
-            GridItem(.adaptive(minimum: 140, maximum: 240), spacing: DesignSystem.Spacing.lg)
+            GridItem(.adaptive(minimum: 100, maximum: 180), spacing: DesignSystem.Spacing.sm)
         ]
     }
     
@@ -266,113 +255,100 @@ struct MediaGalleryView: View {
         .background(themeManager.adaptiveColor(.background))
     }
     
-    // MARK: - Floating Filter Control Panel
-    private var filterControlPanel: some View {
-        VStack(spacing: DesignSystem.Spacing.sm) {
-            // Primary filter button with subtle elevation
-            Button(action: { 
-                withAnimation(DesignSystem.Animation.standard) {
-                    showingFilters.toggle()
-                }
-            }) {
-                Image(systemName: showingFilters ? "slider.horizontal.3" : "slider.horizontal.3")
-                    .font(.system(size: 20, weight: .medium))
+    // MARK: - Filter Bar
+    private var filterBar: some View {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.sm) {
+            HStack(spacing: DesignSystem.Spacing.md) {
+                // Filter buttons
+                Button(action: { showingDatePicker = true }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "calendar")
+                        Text("Date")
+                    }
+                    .font(DesignSystem.Typography.body)
                     .foregroundColor(themeManager.adaptiveColor(.primaryText))
-                    .frame(width: 48, height: 48)
-                    .background(themeManager.adaptiveColor(.cardBackground))
-                    .clipShape(Circle())
-                    .shadow(color: themeManager.adaptiveColor(.primaryText).opacity(0.1), radius: 8, x: 0, y: 4)
+                    .padding(.vertical, DesignSystem.Spacing.xs)
+                }
+
+                Button(action: { showingCategoryFilter = true }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "tag")
+                        Text("Category")
+                    }
+                    .font(DesignSystem.Typography.body)
+                    .foregroundColor(themeManager.adaptiveColor(.primaryText))
+                    .padding(.vertical, DesignSystem.Spacing.xs)
+                }
+
+                Spacer()
+
+                // Media type toggles
+                mediaTypeToggle(icon: "photo.fill", isActive: $filter.showPhotos)
+                mediaTypeToggle(icon: "video.fill", isActive: $filter.showVideos)
+
+                if hasActiveFilters {
+                    Button(action: clearAllFilters) {
+                        Text("Clear All")
+                            .font(DesignSystem.Typography.body)
+                            .foregroundColor(themeManager.adaptiveColor(.error))
+                    }
+                    .padding(.leading, DesignSystem.Spacing.sm)
+                }
             }
             
-            // Expanded filter options - appears with elegant animation
-            if showingFilters {
-                VStack(spacing: DesignSystem.Spacing.sm) {
-                    // Date filter
-                    filterActionButton(
-                        icon: "calendar",
-                        isActive: filter.dateRange != nil,
-                        action: { showingDatePicker = true }
-                    )
-                    
-                    // Category filter
-                    filterActionButton(
-                        icon: "tag",
-                        isActive: filter.categories.count < LogCategory.allCases.count,
-                        action: { showingCategoryFilter = true }
-                    )
-                    
-                    // Media type filters
-                    HStack(spacing: DesignSystem.Spacing.xs) {
-                        mediaTypeToggle(icon: "photo", isActive: filter.showPhotos) {
-                            filter.showPhotos.toggle()
-                            loadMedia()
-                        }
-                        mediaTypeToggle(icon: "video", isActive: filter.showVideos) {
-                            filter.showVideos.toggle()
-                            loadMedia()
-                        }
-                    }
-                    
-                    // Clear all filters
-                    if hasActiveFilters {
-                        Button(action: clearAllFilters) {
-                            Text("general.clear".localized)
-                                .font(DesignSystem.Typography.caption)
-                                .foregroundColor(themeManager.adaptiveColor(.error))
-                        }
-                        .padding(.top, DesignSystem.Spacing.xs)
+            activeFiltersView
+        }
+        .padding(.horizontal, DesignSystem.Spacing.screenPadding)
+        .padding(.vertical, DesignSystem.Spacing.sm)
+        .background(themeManager.adaptiveColor(.background))
+    }
+
+    private var activeFiltersView: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                if let dateRange = filter.dateRange {
+                    let dateString = dateFilterTitle(from: dateRange)
+                    FilterChipView(title: "🗓️ \(dateString)") {
+                        filter.dateRange = nil
+                        loadMedia()
                     }
                 }
-                .transition(.scale.combined(with: .opacity))
+
+                let selectedCategories = filter.categories.sorted(by: { $0.displayName < $1.displayName })
+
+                if selectedCategories.count < LogCategory.allCases.count {
+                    ForEach(selectedCategories, id: \.self) { category in
+                        FilterChipView(title: category.displayName) {
+                            filter.categories.remove(category)
+                            loadMedia()
+                        }
+                    }
+                }
             }
         }
     }
     
-    // MARK: - Helper Views
-    private func filterActionButton(icon: String, isActive: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+    private func dateFilterTitle(from dateRange: DateInterval) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+
+        if Calendar.current.isDate(dateRange.start, inSameDayAs: dateRange.end) {
+            return formatter.string(from: dateRange.start)
+        } else {
+            return "\(formatter.string(from: dateRange.start)) - \(formatter.string(from: dateRange.end))"
+        }
+    }
+    
+    private func mediaTypeToggle(icon: String, isActive: Binding<Bool>) -> some View {
+        Button(action: {
+            isActive.wrappedValue.toggle()
+            loadMedia()
+        }) {
             Image(systemName: icon)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(isActive ? themeManager.adaptiveColor(.buttonText) : themeManager.adaptiveColor(.primaryText))
-                .frame(width: 36, height: 36)
-                .background(isActive ? themeManager.adaptiveColor(.primary) : themeManager.adaptiveColor(.cardBackground))
-                .clipShape(Circle())
-                .shadow(color: themeManager.adaptiveColor(.primaryText).opacity(0.08), radius: 4, x: 0, y: 2)
+                .font(.system(size: 18))
+                .foregroundColor(isActive.wrappedValue ? themeManager.adaptiveColor(.primary) : themeManager.adaptiveColor(.secondaryText))
         }
-    }
-    
-    private func mediaTypeToggle(icon: String, isActive: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: icon)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundColor(isActive ? themeManager.adaptiveColor(.buttonText) : themeManager.adaptiveColor(.secondaryText))
-                .frame(width: 28, height: 28)
-                .background(isActive ? themeManager.adaptiveColor(.primary) : themeManager.adaptiveColor(.secondaryBackground))
-                .clipShape(Circle())
-        }
-    }
-    
-    private var activeFilterIndicators: some View {
-        HStack(spacing: DesignSystem.Spacing.xs) {
-            if filter.dateRange != nil {
-                filterPill("calendar", color: themeManager.adaptiveColor(.primary))
-            }
-            if filter.categories.count < LogCategory.allCases.count {
-                filterPill("tag", color: themeManager.adaptiveColor(.secondary))
-            }
-            if !filter.showPhotos || !filter.showVideos {
-                filterPill("photo.on.rectangle", color: themeManager.adaptiveColor(.tertiary))
-            }
-        }
-    }
-    
-    private func filterPill(_ icon: String, color: Color) -> some View {
-        Image(systemName: icon)
-            .font(.system(size: 10, weight: .medium))
-            .foregroundColor(.white)
-            .frame(width: 20, height: 20)
-            .background(color)
-            .clipShape(Circle())
+        .buttonStyle(PlainButtonStyle())
     }
     
     private var hasActiveFilters: Bool {
@@ -393,6 +369,34 @@ struct MediaGalleryView: View {
         dataProvider.loadMedia(for: context, filter: filter)
     }
 }
+
+
+// MARK: - FilterChipView
+struct FilterChipView: View {
+    let title: String
+    let onRemove: () -> Void
+
+    @EnvironmentObject private var themeManager: ThemeManager
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Text(title)
+                .font(DesignSystem.Typography.caption)
+                .foregroundColor(themeManager.adaptiveColor(.primaryText))
+
+            Button(action: onRemove) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 12))
+                    .foregroundColor(themeManager.adaptiveColor(.secondaryText))
+            }
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(themeManager.adaptiveColor(.secondaryBackground))
+        .cornerRadius(12)
+    }
+}
+
 
 // MARK: - Preview
 

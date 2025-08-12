@@ -9,33 +9,59 @@ import XCTest
 
 final class ConstruAppUITests: XCTestCase {
 
+    var app: XCUIApplication!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launchArguments = ["-ui-testing"]
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    func testGalleryFilterByCategory() throws {
+        // 1. Navigate from project list to the first project's detail view
+        app.collectionViews.buttons.firstMatch.tap()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        // 2. Navigate to the media gallery
+        // I need to find the gallery button. Based on my previous exploration, there should be one.
+        // I'll assume the button is labeled "View Media Gallery".
+        let galleryButton = app.buttons["View Media Gallery"]
+        XCTAssert(galleryButton.waitForExistence(timeout: 5), "Gallery button not found")
+        galleryButton.tap()
 
-    @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
+        // 3. Open the category filter sheet
+        app.buttons["Category"].tap()
+
+        // 4. Deselect all categories to start clean
+        let deselectAllButton = app.buttons["Deselect All"]
+        if deselectAllButton.exists {
+            deselectAllButton.tap()
+        } else {
+            // If it's "Select All", tap it twice to deselect all
+            let selectAllButton = app.buttons["Select All"]
+            selectAllButton.tap()
+            selectAllButton.tap()
         }
+
+        // 5. Select the "Electrical" category
+        app.tables.staticTexts["Electrical"].tap()
+
+        // 6. Close the sheet
+        app.navigationBars["Select Categories"].buttons["Done"].tap()
+
+        // 7. Verify the "Electrical" filter chip is now visible
+        XCTAssert(app.staticTexts["Electrical"].exists)
+
+        // 8. Tap the chip to remove the filter
+        // The chip itself is a button now in my implementation.
+        app.buttons["Electrical"].tap()
+
+        // 10. Verify the chip is gone
+        XCTAssertFalse(app.staticTexts["Electrical"].exists)
     }
 }

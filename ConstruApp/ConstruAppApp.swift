@@ -10,20 +10,32 @@ import SwiftData
 
 @main
 struct ConstruAppApp: App {
-    var sharedModelContainer: ModelContainer = {
+    var sharedModelContainer: ModelContainer
+
+    init() {
         let schema = Schema([
             Project.self,
             Blueprint.self,
             LogEntry.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        let isTesting = CommandLine.arguments.contains("-ui-testing")
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isTesting)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+            if isTesting {
+                // Clear any existing data and create fresh sample data for tests
+                try container.mainContext.delete(model: Project.self)
+                _ = SampleDataManager.createSampleProject(in: container.mainContext)
+            }
+
+            self.sharedModelContainer = container
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-    }()
+    }
 
     var body: some Scene {
         WindowGroup {
